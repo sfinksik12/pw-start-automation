@@ -1,0 +1,27 @@
+{
+  "name": "pw-start-automation",
+  "version": "1.0.0",
+  "description": "Playwright start automation",
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.js",
+  "files": [
+    "src",
+    "index.js"
+  ],
+  "scripts": {},
+  "author": "Pavel Schelokov",
+  "license": "ISC",
+  "keywords": [],
+  "resolutions": {},
+  "devDependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "@playwright/test": "1.54.0",
+    "@types/node": "^24.0.1",
+    "allure-commandline": "^2.30.0",
+    "allure-playwright": "^2.15.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
