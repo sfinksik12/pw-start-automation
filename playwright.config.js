@@ -1,21 +1,21 @@
-import { defineConfig, devices } from "@playwright/test";
-import os from "os";
+import { defineConfig, devices } from '@playwright/test';
+import os from 'os';
 
 export default defineConfig({
-  testDir: "./",
+  testDir: './',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 0 : 0,
   workers: process.env.CI ? 4 : undefined,
 
   reporter: [
-    ["list"],
+    ['list'],
     [
-      "allure-playwright",
+      'allure-playwright',
       {
-        outputFolder: "allure-results",
+        outputFolder: 'allure-results',
         attachments: {
-          "failed-only": true,
+          'failed-only': true,
         },
         detail: false,
         suiteTitle: true,
@@ -29,23 +29,23 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: "",
-    trace: "off",
+    baseURL: 'https://playwright.dev',
+    trace: 'off',
     actionTimeout: 30000,
     navigationTimeout: 30000,
     defaultTimeout: 30000,
-    headless: true,
+    headless: false,
     ignoreHTTPSErrors: true,
     expect: { timeout: 30000 },
   },
 
   projects: [
     {
-      name: "playwright",
+      name: 'playwright',
       use: {
-        ...devices["Desktop Chrome"],
+        ...devices['Desktop Chrome'],
       },
-      testMatch: "tests/**/*.spec.js",
+      testMatch: 'tests/**/*.spec.js',
     },
   ],
 });

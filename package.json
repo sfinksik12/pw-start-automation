@@ -16,7 +16,7 @@
   "resolutions": {},
   "devDependencies": {
     "@faker-js/faker": "^9.7.0",
-    "@playwright/test": "1.54.0",
+    "@playwright/test": "1.55.0",
     "@types/node": "^24.0.1",
     "allure-commandline": "^2.30.0",
     "allure-playwright": "^2.15.1"
