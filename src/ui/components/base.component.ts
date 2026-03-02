@@ -62,21 +62,9 @@ export class BaseComponent {
     return baseLocator.describe('элемент');
   }
 
-  async click(): Promise<void> {
-    await allure.step('Клик по элементу', async () => {
-      await this.element.click();
-    });
-  }
-
   async waitFor(options: { state?: 'attached' | 'detached' | 'visible' | 'hidden'; timeout?: number } = {}): Promise<void> {
     await allure.step('Ожидание появления элемента', async () => {
       await this.element.waitFor(options);
-    });
-  }
-
-  async hover(): Promise<void> {
-    await allure.step('Наведение курсора на элемент', async () => {
-      await this.element.hover();
     });
   }
 
@@ -106,39 +94,14 @@ export class BaseComponent {
 
   async getText(): Promise<string> {
     return await allure.step('Получение текста элемента', async () => {
-      const tagName = await this.element.evaluate((el) => el.tagName.toLowerCase());
-      if (tagName === 'input' || tagName === 'textarea') {
-        return await this.element.inputValue();
-      }
       const text = await this.element.textContent();
       return text?.trim() ?? '';
-    });
-  }
-
-  async fill(value: string, options?: { timeout?: number }): Promise<void> {
-    await allure.step(`Заполнение элемента значением "${value}"`, async () => {
-      await this.element.fill(value, options);
-    });
-  }
-
-  async clear(options?: { timeout?: number }): Promise<void> {
-    await allure.step('Очистка элемента', async () => {
-      await this.element.clear(options);
     });
   }
 
   async isVisible(options?: { timeout?: number }): Promise<boolean> {
     return allure.step('Проверка видимости элемента', async () => {
       return this.element.isVisible(options);
-    });
-  }
-
-  async selectOption(
-    value: string | { value?: string; label?: string; index?: number } | Array<string | { value?: string; label?: string; index?: number }>,
-    options?: { timeout?: number; force?: boolean }
-  ): Promise<string[]> {
-    return allure.step(`Выбор опции "${value}" в элементе`, async () => {
-      return await this.element.selectOption(value as Parameters<Locator['selectOption']>[0], options);
     });
   }
 }
