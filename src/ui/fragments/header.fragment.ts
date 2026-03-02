@@ -19,7 +19,7 @@ export class HeaderFragment extends BaseFragment {
 
   constructor(page: Page) {
     super(page);
-    this.root = this.page.locator('nav[aria-label="Main"]');
+    this.root = this.page.locator('.navbar__inner');
     this.logo = new Label(this.page, this.root, '.navbar__brand');
     this.docsLink = new Button(this.page, this.root, 'a.navbar__link[href="/docs/intro"]');
     this.apiLink = new Button(this.page, this.root, 'a.navbar__link[href="/docs/api/class-playwright"]');
