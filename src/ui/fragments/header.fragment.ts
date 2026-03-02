@@ -1,3 +1,4 @@
+import { allure } from 'allure-playwright';
 import type { Page, Locator } from '@playwright/test';
 import { BaseFragment } from './base.fragment';
 import { Button } from '../components/button.component';
@@ -12,6 +13,9 @@ export class HeaderFragment extends BaseFragment {
   languageDropdown: Button;
   themeToggle: Button;
   searchButton: Button;
+  githubLink: Button;
+  discordLink: Button;
+  mobileToggle: Button;
 
   constructor(page: Page) {
     super(page);
@@ -23,5 +27,14 @@ export class HeaderFragment extends BaseFragment {
     this.languageDropdown = new Button(this.page, this.root, '.navbar__item.dropdown--hoverable');
     this.themeToggle = new Button(this.page, this.root, '.colorModeToggle_DEke button');
     this.searchButton = new Button(this.page, this.root, 'button.DocSearch-Button');
+    this.githubLink = new Button(this.page, this.root, 'a.header-github-link');
+    this.discordLink = new Button(this.page, this.root, 'a.header-discord-link');
+    this.mobileToggle = new Button(this.page, this.root, 'button.navbar__toggle');
+  }
+
+  async getLanguageOption(prefix: string): Promise<Button> {
+    return allure.step(`Получение опции языка: ${prefix}`, async () => {
+      return new Button(this.page, this.languageDropdown.element, `.dropdown__menu .dropdown__link[data-language-prefix="${prefix}"]`);
+    });
   }
 }

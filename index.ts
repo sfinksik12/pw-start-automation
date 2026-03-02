@@ -1,4 +1,5 @@
 export { BasePage } from './src/ui/pages/base.page';
+export { MainPage } from './src/ui/pages/mainPage';
 export { BaseFragment } from './src/ui/fragments/base.fragment';
 export { test, expect } from './src/fixtures/merge.fixtures';
 
