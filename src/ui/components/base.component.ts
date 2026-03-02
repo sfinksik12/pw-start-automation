@@ -7,21 +7,11 @@ import type { Page, Locator } from '@playwright/test';
  */
 export class BaseComponent {
   page: Page;
-  displayName: string;
-  elementType: string;
   parentLocator: string | Locator | null;
   element: Locator;
 
-  constructor(
-    page: Page,
-    locator: string | Locator,
-    displayName: string,
-    elementType = 'element',
-    parentLocator: string | Locator | null = null
-  ) {
+  constructor(page: Page, locator: string | Locator, parentLocator: string | Locator | null = null) {
     this.page = page;
-    this.displayName = displayName;
-    this.elementType = elementType;
     this.parentLocator = parentLocator;
     this.element = this._buildLocator(locator);
   }
@@ -65,57 +55,57 @@ export class BaseComponent {
   }
 
   private _warnAboutIgnoredParent(): void {
-    console.warn(`BaseComponent: parentLocator ignored when passing ready Playwright locator for "${this.displayName}"`);
+    console.warn(`BaseComponent: parentLocator ignored when passing ready Playwright locator`);
   }
 
   private _addDescription(baseLocator: Locator): Locator {
-    return baseLocator.describe(`${this.elementType} "${this.displayName}"`);
+    return baseLocator.describe('элемент');
   }
 
   async click(): Promise<void> {
-    await allure.step(`Click on ${this.elementType} "${this.displayName}"`, async () => {
+    await allure.step('Клик по элементу', async () => {
       await this.element.click();
     });
   }
 
   async waitFor(options: { state?: 'attached' | 'detached' | 'visible' | 'hidden'; timeout?: number } = {}): Promise<void> {
-    await allure.step(`Wait for ${this.elementType} "${this.displayName}" to appear`, async () => {
+    await allure.step('Ожидание появления элемента', async () => {
       await this.element.waitFor(options);
     });
   }
 
   async hover(): Promise<void> {
-    await allure.step(`Hover over ${this.elementType} "${this.displayName}"`, async () => {
+    await allure.step('Наведение курсора на элемент', async () => {
       await this.element.hover();
     });
   }
 
   async focus(): Promise<void> {
-    await allure.step(`Focus on ${this.elementType} "${this.displayName}"`, async () => {
+    await allure.step('Фокус на элементе', async () => {
       await this.element.focus();
     });
   }
 
   async blur(): Promise<void> {
-    await allure.step(`Blur from ${this.elementType} "${this.displayName}"`, async () => {
+    await allure.step('Снятие фокуса с элемента', async () => {
       await this.element.blur();
     });
   }
 
   async getAttribute(attributeName: string): Promise<string | null> {
-    return await allure.step(`Get attribute "${attributeName}" from ${this.elementType} "${this.displayName}"`, async () => {
+    return await allure.step(`Получение атрибута "${attributeName}" элемента`, async () => {
       return await this.element.getAttribute(attributeName);
     });
   }
 
   async scrollIntoView(): Promise<void> {
-    await allure.step(`Scroll to ${this.elementType} "${this.displayName}"`, async () => {
+    await allure.step('Прокрутка к элементу', async () => {
       await this.element.scrollIntoViewIfNeeded();
     });
   }
 
   async getText(): Promise<string> {
-    return await allure.step(`Get text from ${this.elementType} "${this.displayName}"`, async () => {
+    return await allure.step('Получение текста элемента', async () => {
       const tagName = await this.element.evaluate((el) => el.tagName.toLowerCase());
       if (tagName === 'input' || tagName === 'textarea') {
         return await this.element.inputValue();
@@ -126,19 +116,19 @@ export class BaseComponent {
   }
 
   async fill(value: string, options?: { timeout?: number }): Promise<void> {
-    await allure.step(`Fill ${this.elementType} "${this.displayName}" with value "${value}"`, async () => {
+    await allure.step(`Заполнение элемента значением "${value}"`, async () => {
       await this.element.fill(value, options);
     });
   }
 
   async clear(options?: { timeout?: number }): Promise<void> {
-    await allure.step(`Clear ${this.elementType} "${this.displayName}"`, async () => {
+    await allure.step('Очистка элемента', async () => {
       await this.element.clear(options);
     });
   }
 
   async isVisible(options?: { timeout?: number }): Promise<boolean> {
-    return allure.step(`Check visibility of ${this.elementType} "${this.displayName}"`, async () => {
+    return allure.step('Проверка видимости элемента', async () => {
       return this.element.isVisible(options);
     });
   }
@@ -147,7 +137,7 @@ export class BaseComponent {
     value: string | { value?: string; label?: string; index?: number } | Array<string | { value?: string; label?: string; index?: number }>,
     options?: { timeout?: number; force?: boolean }
   ): Promise<string[]> {
-    return allure.step(`Select option "${value}" in ${this.elementType} "${this.displayName}"`, async () => {
+    return allure.step(`Выбор опции "${value}" в элементе`, async () => {
       return await this.element.selectOption(value as Parameters<Locator['selectOption']>[0], options);
     });
   }

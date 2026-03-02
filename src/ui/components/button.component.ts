@@ -6,12 +6,10 @@ import { BaseComponent } from './base.component';
  * Inherits from BaseComponent and uses its methods for interaction.
  */
 export class Button extends BaseComponent {
-  static DEFAULT_TYPE = 'button';
-  static DEFAULT_NAME = 'button';
   button: Locator;
 
-  constructor(page: Page, locator: string | Locator, displayName = Button.DEFAULT_NAME) {
-    super(page, locator, displayName, Button.DEFAULT_TYPE);
+  constructor(page: Page, locator: string | Locator) {
+    super(page, locator);
     this.button = this.element;
   }
 }

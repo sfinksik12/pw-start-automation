@@ -6,12 +6,10 @@ import { BaseComponent } from './base.component';
  * Inherits from BaseComponent and uses its methods for interaction.
  */
 export class Label extends BaseComponent {
-  static DEFAULT_TYPE = 'label';
-  static DEFAULT_NAME = 'Label';
   label: Locator;
 
-  constructor(page: Page, locator: string | Locator, displayName = Label.DEFAULT_NAME) {
-    super(page, locator, displayName, Label.DEFAULT_TYPE);
+  constructor(page: Page, locator: string | Locator) {
+    super(page, locator);
     this.label = this.element;
   }
 }

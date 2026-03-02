@@ -16,12 +16,12 @@ export class HeaderFragment extends BaseFragment {
   constructor(page: Page) {
     super(page);
     this.root = this.page.locator('nav[aria-label="Main"]');
-    this.logo = new Label(this.page, this.root.locator('.navbar__brand'), 'Playwright Logo');
-    this.docsLink = new Button(this.page, this.root.locator('a.navbar__link[href="/docs/intro"]'), 'Docs');
-    this.apiLink = new Button(this.page, this.root.locator('a.navbar__link[href="/docs/api/class-playwright"]'), 'API');
-    this.communityLink = new Button(this.page, this.root.locator('a.navbar__link[href="/community/welcome"]'), 'Community');
-    this.languageDropdown = new Button(this.page, this.root.locator('.navbar__item.dropdown--hoverable'), 'Language Dropdown');
-    this.themeToggle = new Button(this.page, this.root.locator('.colorModeToggle_DEke button'), 'Theme Toggle');
-    this.searchButton = new Button(this.page, this.root.locator('button.DocSearch-Button'), 'Search Button');
+    this.logo = new Label(this.page, this.root.locator('.navbar__brand'));
+    this.docsLink = new Button(this.page, this.root.locator('a.navbar__link[href="/docs/intro"]'));
+    this.apiLink = new Button(this.page, this.root.locator('a.navbar__link[href="/docs/api/class-playwright"]'));
+    this.communityLink = new Button(this.page, this.root.locator('a.navbar__link[href="/community/welcome"]'));
+    this.languageDropdown = new Button(this.page, this.root.locator('.navbar__item.dropdown--hoverable'));
+    this.themeToggle = new Button(this.page, this.root.locator('.colorModeToggle_DEke button'));
+    this.searchButton = new Button(this.page, this.root.locator('button.DocSearch-Button'));
   }
 }

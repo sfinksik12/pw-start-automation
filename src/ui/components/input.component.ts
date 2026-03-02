@@ -6,12 +6,10 @@ import { BaseComponent } from './base.component';
  * Inherits from BaseComponent and uses its methods for interaction.
  */
 export class Input extends BaseComponent {
-  static DEFAULT_TYPE = 'input';
-  static DEFAULT_NAME = 'Input field';
   input: Locator;
 
-  constructor(page: Page, locator: string | Locator, displayName = Input.DEFAULT_NAME) {
-    super(page, locator, displayName, Input.DEFAULT_TYPE);
+  constructor(page: Page, locator: string | Locator) {
+    super(page, locator);
     this.input = this.element;
   }
 }

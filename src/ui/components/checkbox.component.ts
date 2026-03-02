@@ -6,12 +6,10 @@ import { BaseComponent } from './base.component';
  * Inherits from BaseComponent and uses its methods for interaction.
  */
 export class Checkbox extends BaseComponent {
-  static DEFAULT_TYPE = 'checkbox';
-  static DEFAULT_NAME = 'Checkbox';
   checkbox: Locator;
 
-  constructor(page: Page, locator: string | Locator, displayName = Checkbox.DEFAULT_NAME) {
-    super(page, locator, displayName, Checkbox.DEFAULT_TYPE);
+  constructor(page: Page, locator: string | Locator) {
+    super(page, locator);
     this.checkbox = this.element;
   }
 }
