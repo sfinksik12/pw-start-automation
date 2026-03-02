@@ -8,8 +8,8 @@ import { BaseComponent } from './base.component';
 export class Label extends BaseComponent {
   label: Locator;
 
-  constructor(page: Page, parentOrLocator: string | Locator, locator?: string) {
-    super(page, parentOrLocator, locator);
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string, name?: string) {
+    super(page, parentOrLocator, locator, name);
     this.label = this.element;
   }
 }

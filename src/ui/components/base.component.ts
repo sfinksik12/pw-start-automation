@@ -9,9 +9,11 @@ export class BaseComponent {
   page: Page;
   parentLocator: string | Locator | null;
   element: Locator;
+  name: string;
 
-  constructor(page: Page, parentOrLocator: string | Locator, locator?: string) {
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string, name?: string) {
     this.page = page;
+    this.name = name ?? 'элемент';
     if (locator !== undefined) {
       this.parentLocator = parentOrLocator;
       this.element = this._addDescription(this._buildStringLocator(locator));
@@ -41,37 +43,37 @@ export class BaseComponent {
   }
 
   async waitFor(options: { state?: 'attached' | 'detached' | 'visible' | 'hidden'; timeout?: number } = {}): Promise<void> {
-    await allure.step('Ожидание появления элемента', async () => {
+    await allure.step(`Ожидание появления "${this.name}"`, async () => {
       await this.element.waitFor(options);
     });
   }
 
   async focus(): Promise<void> {
-    await allure.step('Фокус на элементе', async () => {
+    await allure.step(`Фокус на "${this.name}"`, async () => {
       await this.element.focus();
     });
   }
 
   async blur(): Promise<void> {
-    await allure.step('Снятие фокуса с элемента', async () => {
+    await allure.step(`Снятие фокуса с "${this.name}"`, async () => {
       await this.element.blur();
     });
   }
 
   async getAttribute(attributeName: string): Promise<string | null> {
-    return await allure.step(`Получение атрибута "${attributeName}" элемента`, async () => {
+    return await allure.step(`Получение атрибута "${attributeName}" у "${this.name}"`, async () => {
       return await this.element.getAttribute(attributeName);
     });
   }
 
   async scrollIntoView(): Promise<void> {
-    await allure.step('Прокрутка к элементу', async () => {
+    await allure.step(`Прокрутка к "${this.name}"`, async () => {
       await this.element.scrollIntoViewIfNeeded();
     });
   }
 
   async getText(): Promise<string> {
-    return await allure.step('Получение текста элемента', async () => {
+    return await allure.step(`Получение текста "${this.name}"`, async () => {
       const text = await this.element.textContent();
       return text?.trim() ?? '';
     });

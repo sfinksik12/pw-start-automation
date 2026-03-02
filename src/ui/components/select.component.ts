@@ -9,8 +9,8 @@ import { BaseComponent } from './base.component';
 export class Select extends BaseComponent {
   select: Locator;
 
-  constructor(page: Page, parentOrLocator: string | Locator, locator?: string) {
-    super(page, parentOrLocator, locator);
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string, name?: string) {
+    super(page, parentOrLocator, locator, name);
     this.select = this.element;
   }
 
@@ -18,7 +18,7 @@ export class Select extends BaseComponent {
     value: string | { value?: string; label?: string; index?: number } | Array<string | { value?: string; label?: string; index?: number }>,
     options?: { timeout?: number; force?: boolean }
   ): Promise<string[]> {
-    return allure.step(`Выбор опции "${value}" в элементе`, async () => {
+    return allure.step(`Выбор опции "${value}" в "${this.name}"`, async () => {
       return await this.element.selectOption(value as Parameters<Locator['selectOption']>[0], options);
     });
   }
