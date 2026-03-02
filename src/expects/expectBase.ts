@@ -119,7 +119,7 @@ export function getMessage(
   matcherResult: unknown,
   message?: string
 ): string {
-  if (pass) return 'passed';
+  if (pass) return 'пройдено';
   const hint = assertionContext.utils?.matcherHint
     ? assertionContext.utils.matcherHint(customAssertionName, undefined, undefined, {
         isNot: assertionContext.isNot,

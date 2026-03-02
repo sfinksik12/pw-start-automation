@@ -4,7 +4,7 @@ import { assertionBase, logMessageElem } from './expectBase';
 export const toBeDisabledAllure = baseExpect.extend({
   async toBeDisabledAllure(locator: unknown, whatMessage?: string) {
     const subject = whatMessage ?? logMessageElem(locator);
-    const logMessage = `👁️ Check: "${subject}" should be disabled`;
+    const logMessage = `👁️ Проверка: "${subject}" должен быть отключён`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toBeDisabled',

@@ -3,8 +3,8 @@ import { assertionBase } from './expectBase';
 
 export const toBeBooleanAllure = baseExpect.extend({
   async toBeBooleanAllure(value: unknown, whatMessage?: string) {
-    const subject = whatMessage ?? 'value';
-    const logMessage = `🔍 Check: "${subject}" should be a boolean value`;
+    const subject = whatMessage ?? 'значение';
+    const logMessage = `🔍 Проверка: "${subject}" должен быть булевым значением`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toBe',

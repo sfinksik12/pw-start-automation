@@ -7,8 +7,8 @@ function isPlainObject(val: unknown): boolean {
 
 export const toBeObjectAllure = baseExpect.extend({
   async toBeObjectAllure(value: unknown, whatMessage?: string) {
-    const subject = whatMessage ?? 'value';
-    const logMessage = `🔍 Check: "${subject}" should be an object`;
+    const subject = whatMessage ?? 'значение';
+    const logMessage = `🔍 Проверка: "${subject}" должен быть объектом`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toBe',

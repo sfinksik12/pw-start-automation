@@ -3,8 +3,8 @@ import { assertionBase } from './expectBase';
 
 export const toBeNumberAllure = baseExpect.extend({
   async toBeNumberAllure(value: unknown, whatMessage?: string) {
-    const subject = whatMessage ?? 'value';
-    const logMessage = `🔍 Check: "${subject}" should be a number`;
+    const subject = whatMessage ?? 'значение';
+    const logMessage = `🔍 Проверка: "${subject}" должен быть числом`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toBe',
