@@ -9,8 +9,8 @@ import { BaseComponent } from './base.component';
 export class Select extends BaseComponent {
   select: Locator;
 
-  constructor(page: Page, locator: string | Locator) {
-    super(page, locator);
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string) {
+    super(page, parentOrLocator, locator);
     this.select = this.element;
   }
 

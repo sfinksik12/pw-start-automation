@@ -10,26 +10,15 @@ export class BaseComponent {
   parentLocator: string | Locator | null;
   element: Locator;
 
-  constructor(page: Page, locator: string | Locator, parentLocator: string | Locator | null = null) {
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string) {
     this.page = page;
-    this.parentLocator = parentLocator;
-    this.element = this._buildLocator(locator);
-  }
-
-  private _buildLocator(locator: string | Locator): Locator {
-    const baseLocator = this._resolveBaseLocator(locator);
-    return this._addDescription(baseLocator);
-  }
-
-  private _resolveBaseLocator(locator: string | Locator): Locator {
-    if (this._isStringLocator(locator)) {
-      return this._buildStringLocator(locator);
+    if (locator !== undefined) {
+      this.parentLocator = parentOrLocator;
+      this.element = this._addDescription(this._buildStringLocator(locator));
+    } else {
+      this.parentLocator = null;
+      this.element = this._addDescription(this._buildStringLocator(parentOrLocator as string));
     }
-    return this._handleReadyLocator(locator);
-  }
-
-  private _isStringLocator(locator: string | Locator): locator is string {
-    return typeof locator === 'string';
   }
 
   private _buildStringLocator(locator: string): Locator {
@@ -45,17 +34,6 @@ export class BaseComponent {
       return this.page.locator(this.parentLocator);
     }
     return this.parentLocator!;
-  }
-
-  private _handleReadyLocator(locator: Locator): Locator {
-    if (this.parentLocator) {
-      this._warnAboutIgnoredParent();
-    }
-    return locator;
-  }
-
-  private _warnAboutIgnoredParent(): void {
-    console.warn(`BaseComponent: parentLocator игнорируется при передаче готового Playwright locator`);
   }
 
   private _addDescription(baseLocator: Locator): Locator {
@@ -96,12 +74,6 @@ export class BaseComponent {
     return await allure.step('Получение текста элемента', async () => {
       const text = await this.element.textContent();
       return text?.trim() ?? '';
-    });
-  }
-
-  async isVisible(options?: { timeout?: number }): Promise<boolean> {
-    return allure.step('Проверка видимости элемента', async () => {
-      return this.element.isVisible(options);
     });
   }
 }

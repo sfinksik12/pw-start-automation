@@ -1,9 +1,11 @@
-import { test } from '../index';
+import { test, expect } from '../index';
 import { MainPage } from '../src/ui/pages/mainPage';
 
-test('Main page', async ({ page }) => {
-  const mainPage = new MainPage(page);
-  await mainPage.openPage('/');
-  await mainPage.headerFragment.logo.isVisible();
-  await mainPage.page.waitForTimeout(5000);
+test.describe('Main page', () => {
+  test('заголовок страницы содержит Playwright', async ({ page }) => {
+    const mainPage = new MainPage(page);
+    await mainPage.openPage('/');
+
+    expect(await mainPage.getTitle()).toContainAllure('Playwright');
+  });
 });

@@ -8,8 +8,8 @@ import { BaseComponent } from './base.component';
 export class Title extends BaseComponent {
   title: Locator;
 
-  constructor(page: Page, locator: string | Locator) {
-    super(page, locator);
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string) {
+    super(page, parentOrLocator, locator);
     this.title = this.element;
   }
 }
