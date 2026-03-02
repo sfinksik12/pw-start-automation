@@ -3,8 +3,8 @@ import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from './base.component';
 
 /**
- * Class representing select elements.
- * Inherits from BaseComponent and provides selectOption method.
+ * Класс, представляющий элементы select.
+ * Наследуется от BaseComponent и предоставляет метод selectOption.
  */
 export class Select extends BaseComponent {
   select: Locator;

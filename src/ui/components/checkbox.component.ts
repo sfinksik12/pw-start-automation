@@ -3,8 +3,8 @@ import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from './base.component';
 
 /**
- * Class representing checkbox elements.
- * Inherits from BaseComponent and uses its methods for interaction.
+ * Класс, представляющий чекбоксы.
+ * Наследуется от BaseComponent и использует его методы для взаимодействия.
  */
 export class Checkbox extends BaseComponent {
   checkbox: Locator;

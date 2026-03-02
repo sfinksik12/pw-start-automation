@@ -2,8 +2,8 @@ import { allure } from 'allure-playwright';
 import type { Page, Locator } from '@playwright/test';
 
 /**
- * Base class for all UI components of the framework.
- * Provides basic methods for interacting with elements and Allure integration.
+ * Базовый класс для всех UI-компонентов фреймворка.
+ * Предоставляет базовые методы взаимодействия с элементами и интеграцию с Allure.
  */
 export class BaseComponent {
   page: Page;
@@ -55,7 +55,7 @@ export class BaseComponent {
   }
 
   private _warnAboutIgnoredParent(): void {
-    console.warn(`BaseComponent: parentLocator ignored when passing ready Playwright locator`);
+    console.warn(`BaseComponent: parentLocator игнорируется при передаче готового Playwright locator`);
   }
 
   private _addDescription(baseLocator: Locator): Locator {

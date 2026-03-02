@@ -3,8 +3,8 @@ import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from './base.component';
 
 /**
- * Class representing input fields.
- * Inherits from BaseComponent and uses its methods for interaction.
+ * Класс, представляющий поля ввода.
+ * Наследуется от BaseComponent и использует его методы для взаимодействия.
  */
 export class Input extends BaseComponent {
   input: Locator;
