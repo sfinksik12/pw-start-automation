@@ -7,11 +7,8 @@ import { BaseComponent } from './base.component';
  * Наследуется от BaseComponent и использует его методы для взаимодействия.
  */
 export class Input extends BaseComponent {
-  input: Locator;
-
   constructor(page: Page, parentOrLocator: string | Locator, locator?: string, name?: string) {
     super(page, parentOrLocator, locator, name);
-    this.input = this.element;
   }
 
   async getText(): Promise<string> {

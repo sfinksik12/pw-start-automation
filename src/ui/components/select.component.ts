@@ -7,11 +7,8 @@ import { BaseComponent } from './base.component';
  * Наследуется от BaseComponent и предоставляет метод selectOption.
  */
 export class Select extends BaseComponent {
-  select: Locator;
-
   constructor(page: Page, parentOrLocator: string | Locator, locator?: string, name?: string) {
     super(page, parentOrLocator, locator, name);
-    this.select = this.element;
   }
 
   async selectOption(
