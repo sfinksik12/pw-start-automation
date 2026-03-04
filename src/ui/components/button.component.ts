@@ -8,8 +8,8 @@ import { BaseComponent } from './base.component';
 export class Button extends BaseComponent {
   button: Locator;
 
-  constructor(page: Page, locator: string | Locator) {
-    super(page, locator);
+  constructor(page: Page, locator: string | Locator, description?: string) {
+    super(page, locator, null, description);
     this.button = this.element;
   }
 }

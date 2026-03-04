@@ -98,8 +98,9 @@ export function logMessageElem(locator: unknown, message?: string): string {
   if (message) return message;
 
   if (typeof locator === 'object' && locator !== null) {
-    const loc = locator as { displayName?: string; name?: unknown };
+    const loc = locator as { displayName?: string; description?: string; name?: unknown };
     if (loc.displayName) return loc.displayName;
+    if (loc.description) return loc.description;
     if (loc.name) return loc.name.toString();
   }
 
