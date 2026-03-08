@@ -7,6 +7,7 @@ import { toBeHiddenAllure } from './toBeHiddenAllure';
 import { toHaveTextAllure } from './toHaveTextAllure';
 import { toHaveAttributeAllure } from './toHaveAttributeAllure';
 import { toHaveClassAllure } from './toHaveClassAllure';
+import { toHaveValueAllure } from './toHaveValueAllure';
 import { toEqualAllure } from './toEqualAllure';
 import { toBeNumberAllure } from './toBeNumberAllure';
 import { toBeStringAllure } from './toBeStringAllure';
@@ -27,6 +28,7 @@ export const expectExtensions = [
   toHaveTextAllure,
   toHaveAttributeAllure,
   toHaveClassAllure,
+  toHaveValueAllure,
   toEqualAllure,
   toBeNumberAllure,
   toBeStringAllure,

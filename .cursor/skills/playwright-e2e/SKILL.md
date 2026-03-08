@@ -67,7 +67,7 @@ test.beforeEach(async ({ mainPage }) => {
 
 - Клик, hover: mainPage.headerFragment.docsLink.click(), .hover()
 - Динамические элементы: const option = await mainPage.headerFragment.getLanguageOption('/python/'); await option.click()
-- Элементы вне POM (модалки, оверлеи): page.locator('.DocSearch-Modal'), затем waitFor и expect(...).toBeVisibleAllure()
+- Элементы вне POM (модалки, оверлеи): page.locator('.DocSearch-Modal'), затем expect(...).toBeVisibleAllure() (без waitFor)
 
 ## 8. Проверки
 
@@ -75,29 +75,29 @@ test.beforeEach(async ({ mainPage }) => {
 
 ## 9. Навигация и ожидания
 
-- await page.waitForURL(/\/docs\/intro/)
-- await modal.waitFor({ state: 'visible' })
+- await page.waitForURL(/\/docs\/intro/) — для перехода по URL
+- Не использовать locator.waitFor() — expect() и действия (click, fill) сами ждут появления элемента (auto-retry). Вместо `await el.waitFor({ state: 'visible' }); expect(el).toBeVisibleAllure()` достаточно `expect(el).toBeVisibleAllure()`
 
 # Output format
 
 - Готовый spec-файл или изменения в существующий
-- Файлы в tests/*.spec.ts
+- Файлы в tests/\*.spec.ts
 - Один тест — одна логическая проверка
 
 # Allure-матчеры
 
-| Матчер | Пример |
-|--------|--------|
-| toBeVisibleAllure('описание') | expect(headerFragment.root).toBeVisibleAllure('Header root') |
-| toBeHiddenAllure('описание') | expect(modal).toBeHiddenAllure('Modal closed') |
-| toHaveTextAllure(regex, 'описание') | expect(logo).toHaveTextAllure(/Playwright/, 'Logo') |
+| Матчер                                         | Пример                                                                   |
+| ---------------------------------------------- | ------------------------------------------------------------------------ |
+| toBeVisibleAllure('описание')                  | expect(headerFragment.root).toBeVisibleAllure('Header root')             |
+| toBeHiddenAllure('описание')                   | expect(modal).toBeHiddenAllure('Modal closed')                           |
+| toHaveTextAllure(regex, 'описание')            | expect(logo).toHaveTextAllure(/Playwright/, 'Logo')                      |
 | toHaveAttributeAllure(attr, regex, 'описание') | expect(link).toHaveAttributeAllure('href', /github\.com/, 'GitHub link') |
-| toHaveClassAllure(regex, 'описание') | expect(el).toHaveClassAllure(/active/, 'Active state') |
-| toBeEnabledAllure('описание') | expect(button).toBeEnabledAllure('Submit button') |
-| toBeDisabledAllure('описание') | expect(button).toBeDisabledAllure('Disabled button') |
-| toBeEditableAllure('описание') | expect(input).toBeEditableAllure('Search input') |
-| toEqualAllure(value, 'описание') | expect(result).toEqualAllure(expected, 'Result') |
-| toContainAllure(value, 'описание') | expect(list).toContainAllure(item, 'List contains item') |
+| toHaveClassAllure(regex, 'описание')           | expect(el).toHaveClassAllure(/active/, 'Active state')                   |
+| toBeEnabledAllure('описание')                  | expect(button).toBeEnabledAllure('Submit button')                        |
+| toBeDisabledAllure('описание')                 | expect(button).toBeDisabledAllure('Disabled button')                     |
+| toBeEditableAllure('описание')                 | expect(input).toBeEditableAllure('Search input')                         |
+| toEqualAllure(value, 'описание')               | expect(result).toEqualAllure(expected, 'Result')                         |
+| toContainAllure(value, 'описание')             | expect(list).toContainAllure(item, 'List contains item')                 |
 
 Матчеры принимают Locator или компонент (Button, Label и т.п.) — для компонентов автоматически используется .element.
 
@@ -129,10 +129,12 @@ test.describe('Название группы', () => {
 - [ ] Все проверки через toXxxAllure с описанием
 - [ ] Элементы через POM (кроме вне POM)
 - [ ] Один тест — одна логическая проверка
+- [ ] Нет locator.waitFor() — только expect и действия
 - [ ] npm run typecheck проходит
 
 # Anti-patterns
 
+- ❌ locator.waitFor() — использовать expect() или действия (click, fill), они сами ждут
 - ❌ setViewportSize для мобильных, тесты для hamburger/mobile menu
 - ❌ Дублировать проверки, уже есть в tests/
 - ❌ import { test, expect } from '@playwright/test'
@@ -148,11 +150,9 @@ test.describe('Название группы', () => {
 **Output:**
 
 ```typescript
-test('Кнопка Search открывает модальное окно поиска', async ({ page, mainPage }) => {
+test('Кнопка Search открывает модальное окно поиска', async ({ mainPage }) => {
   await mainPage.headerFragment.searchButton.click();
-  const searchModal = page.locator('.DocSearch-Modal');
-  await searchModal.waitFor({ state: 'visible' });
-  await expect(searchModal).toBeVisibleAllure('DocSearch modal');
+  await expect(mainPage.docSearchModal.root).toBeVisibleAllure('DocSearch modal');
 });
 ```
 

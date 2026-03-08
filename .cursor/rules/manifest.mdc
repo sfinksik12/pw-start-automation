@@ -223,12 +223,12 @@ test.describe('Название группы', () => {
 
 - Клик, hover — через компонент: `mainPage.headerFragment.docsLink.click()`, `.hover()`.
 - Динамические элементы — через метод фрагмента: `const option = await mainPage.headerFragment.getLanguageOption('/python/'); await option.click()`.
-- Элементы вне POM (модалки, временные блоки) — `page.locator('.DocSearch-Modal')`, затем `waitFor` и `expect(...).toBeVisibleAllure()`.
+- Элементы вне POM (модалки, временные блоки) — `page.locator('.DocSearch-Modal')`, затем `expect(...).toBeVisibleAllure()`.
 
 **Навигация и ожидания:**
 
 - `await page.waitForURL(/\/docs\/intro/)` — ожидание перехода.
-- `await modal.waitFor({ state: 'visible' })` — ожидание появления элемента.
+- Не использовать `locator.waitFor()` — `expect()` и действия (click, fill) сами ждут появления элемента (auto-retry).
 
 **Структура теста:**
 
