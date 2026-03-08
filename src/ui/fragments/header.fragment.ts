@@ -4,6 +4,7 @@ import { BaseFragment } from './base.fragment';
 import { Button } from '../components/button.component';
 import { Label } from '../components/label.component';
 
+/** Фрагмент хедера страницы. */
 export class HeaderFragment extends BaseFragment {
   root: Locator;
   logo: Label;
@@ -34,7 +35,12 @@ export class HeaderFragment extends BaseFragment {
 
   async getLanguageOption(prefix: string): Promise<Button> {
     return allure.step(`Получение опции языка: ${prefix}`, async () => {
-      return new Button(this.page, this.languageDropdown.element, `.dropdown__menu .dropdown__link[data-language-prefix="${prefix}"]`, `Language Option ${prefix}`);
+      return new Button(
+        this.page,
+        this.languageDropdown.element,
+        `.dropdown__menu .dropdown__link[data-language-prefix="${prefix}"]`,
+        `Language Option ${prefix}`,
+      );
     });
   }
 }
