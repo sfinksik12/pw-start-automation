@@ -35,7 +35,7 @@ alwaysApply: true
 
 **Фикстуры** (`/src/fixtures`):
 
-- `pom.fixtures.ts` — расширяет `baseTest` фикстурой `mainPage: MainPage`. Инжектит готовый Page Object в тест.
+- `pom.fixtures.ts` — расширяет `baseTest` фикстурами `mainPage: MainPage` и `apiMock: ApiMock`. Инжектит готовый Page Object и helper для API-моков в тест.
 - `merge.fixtures.ts` — объединяет `baseTest` и `pomTest` через `mergeTests`, добавляет кастомные Allure-матчеры через `mergeExpects`. Экспортирует `test` и `expect` для спек-файлов.
 
 **Структура репозитория:**
@@ -49,6 +49,7 @@ alwaysApply: true
 │   │   ├── fragments/        # Фрагменты страниц (HeaderFragment и др.)
 │   │   └── components/       # UI-компоненты (Button, Input, Checkbox, Label, Select, Title)
 │   ├── fixtures/             # Фикстуры Playwright (pom.fixtures, merge.fixtures)
+│   ├── mocks/                # Helpers для сетевых моков (ApiMock)
 │   └── expects/              # Кастомные Allure-матчеры (toBeVisibleAllure, toHaveTextAllure и др.)
 ├── index.ts                  # Точка входа: экспорт test, expect, страниц, компонентов
 ├── playwright.config.ts      # Конфиг Playwright
@@ -63,6 +64,7 @@ alwaysApply: true
 | `/src/ui/fragments`    | Фрагменты страниц (HeaderFragment и др.)                             |
 | `/src/ui/components`   | UI-компоненты (Button, Input, Checkbox, Label, Select, Title)        |
 | `/src/fixtures`        | Фикстуры Playwright (POM, merge с кастомным expect)                  |
+| `/src/mocks`           | Helpers для API-моков (`ApiMock`)                                    |
 | `/src/expects`         | Кастомные Allure-матчеры (toBeVisibleAllure, toHaveTextAllure и др.) |
 | `/tests`               | E2E-тесты (`*.spec.ts`)                                              |
 | `/index.ts`            | Точка входа, экспорт страниц, компонентов и test/expect              |
@@ -217,6 +219,7 @@ test.describe('Название группы', () => {
 - **Viewport:** только десктоп. Не использовать `setViewportSize` для мобильных, не писать тесты для мобильных элементов (hamburger, mobile menu).
 - **Импорт:** `import { test, expect } from '../index'` — только из index, не из `@playwright/test`.
 - **Фикстуры:** `async ({ mainPage })` — Page Object; `async ({ page, mainPage })` — когда нужен доступ к `page` (waitForURL, locator для элементов вне POM).
+- **API-моки:** `async ({ apiMock, mainPage })` или `async ({ apiMock, page, mainPage })` — когда сценарий требует подмены `fetch/xhr`.
 - **beforeEach:** подготовка состояния (открытие страницы, логин). `openPage('/')` — относительный путь к baseURL.
 - **Доступ к элементам:** через Page Object: `mainPage.headerFragment.docsLink`, `mainPage.headerFragment.logo`.
 
@@ -235,6 +238,22 @@ test.describe('Название группы', () => {
 - Клик, hover — через компонент: `mainPage.headerFragment.docsLink.click()`, `.hover()`.
 - Динамические элементы — через метод фрагмента: `const option = await mainPage.headerFragment.getLanguageOption('/python/'); await option.click()`.
 - Элементы вне POM (модалки, временные блоки) — `page.locator('.DocSearch-Modal')`, затем `expect(...).toBeVisibleAllure()`.
+
+**API-моки:**
+
+- Для мокирования использовать fixture `apiMock`, а не прямой `page.route()`.
+- Ставить мок до `mainPage.openPage('/')` или другого `goto`, если запрос нужен на старте страницы.
+- Предпочитать короткие методы `apiMock.get(...)`, `apiMock.post(...)`; универсальный `apiMock.mock(...)` использовать для нестандартных кейсов.
+- `apiMock.reset()` использовать, когда в рамках одного теста нужно снять ранее зарегистрированные моки.
+- Мокировать только API/XHR/fetch. Не перехватывать document, styles, scripts и другие ассеты без отдельной причины.
+- Не переносить network-моки в `Page`, `Fragment` или `Component`: это тестовая инфраструктура, а не POM.
+
+```typescript
+test.beforeEach(async ({ apiMock, mainPage }) => {
+  await apiMock.get('**/api/search', { results: [] });
+  await mainPage.openPage('/');
+});
+```
 
 **Навигация и ожидания:**
 
@@ -255,6 +274,7 @@ test.describe('Название группы', () => {
 
 - **Импорты в тестах:** `import { test, expect } from '../index'` — единая точка входа
 - **Page Object:** фикстура `mainPage` доступна через `async ({ mainPage })`
+- **API mocks:** фикстура `apiMock` доступна через `async ({ apiMock })`
 - **Allure-проверки:** `expect(locator).toBeVisibleAllure('описание')`, `toHaveTextAllure`, `toHaveAttributeAllure` и др.
 - **Именование:** `*.spec.ts` для тестов, `*.component.ts` для компонентов, `*.fragment.ts` для фрагментов, `*.page.ts` для страниц
 
