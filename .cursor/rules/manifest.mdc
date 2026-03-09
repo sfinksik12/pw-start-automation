@@ -270,6 +270,25 @@ test.beforeEach(async ({ apiMock, mainPage }) => {
 
 **Именование:** `test.describe('Хедер')` — группа по фиче/блоку; `test('Ссылка Docs ведёт на intro')` — описание ожидаемого результата.
 
+**Именование переменных:**
+
+- Использовать `camelCase` для локальных переменных, параметров, фикстур и свойств: `mainPage`, `searchQuery`, `expectedTitle`.
+- Имя переменной должно отражать смысл сценария, а не техническую реализацию: `docsLink`, `themeToggle`, `searchModal`, а не `button1`, `elem`, `tmp`.
+- Для Page Object, fragment и component использовать имя по роли объекта: `mainPage`, `headerFragment`, `languageDropdown`, `searchInput`.
+- Для булевых переменных использовать префиксы `is`, `has`, `can`, `should`: `isDocsPageOpened`, `hasSearchResults`, `shouldOpenInNewTab`.
+- Для массивов и коллекций использовать множественное число: `navLinks`, `searchResults`, `supportedLanguages`.
+- Для ожидаемых данных использовать префикс `expected`: `expectedUrl`, `expectedLogoText`, `expectedRequestPayload`.
+- Для данных запроса, ответа и моков использовать предметные имена: `searchRequest`, `searchResponse`, `emptyResultsMock`, а не `data`, `responseBody`, `mock1`.
+- Избегать слишком общих имён: `value`, `item`, `obj`, `arr`, `res`, если переменная живёт дольше 1-2 строк и участвует в проверке.
+- Константы общего назначения можно называть в `UPPER_SNAKE_CASE`, только если это действительно переиспользуемая константа уровня файла: `DEFAULT_TIMEOUT_MS`. Обычные `const` внутри теста оставлять в `camelCase`.
+
+```typescript
+const expectedDocsUrl = '/docs/intro';
+const searchQuery = 'locator';
+const isSearchModalVisible = true;
+const searchResults = ['Auto-waiting', 'Locators'];
+```
+
 ## 7. Стандарты
 
 - **Импорты в тестах:** `import { test, expect } from '../index'` — единая точка входа
