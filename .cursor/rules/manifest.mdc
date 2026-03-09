@@ -155,14 +155,14 @@ export class MainPage extends BasePage {
 
 **Методы BasePage (доступны во всех страницах):**
 
-| Метод | Описание |
-|-------|----------|
-| `openPage(url)` | Переход по URL (относительно baseURL). `openPage('/')`, `openPage('/docs/intro')` |
-| `reload()` | Обновление страницы |
-| `goBack()` / `goForward()` | Навигация по истории |
-| `getTitle()` / `getUrl()` | Получение заголовка и URL |
-| `waitForUrl(url, options?)` | Ожидание перехода на URL (url: string или RegExp) |
-| `screenshot(options?)` | Скриншот страницы |
+| Метод                       | Описание                                                                          |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `openPage(url)`             | Переход по URL (относительно baseURL). `openPage('/')`, `openPage('/docs/intro')` |
+| `reload()`                  | Обновление страницы                                                               |
+| `goBack()` / `goForward()`  | Навигация по истории                                                              |
+| `getTitle()` / `getUrl()`   | Получение заголовка и URL                                                         |
+| `waitForUrl(url, options?)` | Ожидание перехода на URL (url: string или RegExp)                                 |
+| `screenshot(options?)`      | Скриншот страницы                                                                 |
 
 Все методы обёрнуты в `allure.step()` для отчётов.
 
@@ -211,10 +211,10 @@ test.describe('Название группы', () => {
 
 **Allure-проверки:**
 
-| Матчер | Пример |
-|--------|--------|
-| `toBeVisibleAllure('описание')` | `expect(fragment.root).toBeVisibleAllure('Header root')` |
-| `toHaveTextAllure(regex, 'описание')` | `expect(logo).toHaveTextAllure(/Playwright/, 'Logo')` |
+| Матчер                                           | Пример                                                                     |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| `toBeVisibleAllure('описание')`                  | `expect(fragment.root).toBeVisibleAllure('Header root')`                   |
+| `toHaveTextAllure(regex, 'описание')`            | `expect(logo).toHaveTextAllure(/Playwright/, 'Logo')`                      |
 | `toHaveAttributeAllure(attr, regex, 'описание')` | `expect(link).toHaveAttributeAllure('href', /github\.com/, 'GitHub link')` |
 
 Второй аргумент — описание для Allure-отчёта.
