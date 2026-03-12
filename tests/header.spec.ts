@@ -7,16 +7,16 @@ test.describe('Хедер', () => {
 
   test('Хедер виден', async ({ mainPage }) => {
     const headerFragment = mainPage.headerFragment;
-    await expect(headerFragment.root).toBeVisibleAllure('Header root');
-    await expect(headerFragment.logo).toBeVisibleAllure('Logo');
-    await expect(headerFragment.docsLink).toBeVisibleAllure('Docs link');
-    await expect(headerFragment.apiLink).toBeVisibleAllure('API link');
-    await expect(headerFragment.communityLink).toBeVisibleAllure('Community link');
-    await expect(headerFragment.searchButton).toBeVisibleAllure('Search button');
+    expect(headerFragment.root).toBeVisibleAllure('Header root');
+    expect(headerFragment.logo).toBeVisibleAllure('Logo');
+    expect(headerFragment.docsLink).toBeVisibleAllure('Docs link');
+    expect(headerFragment.apiLink).toBeVisibleAllure('API link');
+    expect(headerFragment.communityLink).toBeVisibleAllure('Community link');
+    expect(headerFragment.searchButton).toBeVisibleAllure('Search button');
   });
 
   test('Логотип содержит текст Playwright', async ({ mainPage }) => {
-    await expect(mainPage.headerFragment.logo).toHaveTextAllure(/Playwright/, 'Logo');
+    expect(mainPage.headerFragment.logo).toHaveTextAllure(/Playwright/, 'Logo');
   });
 
   test('Ссылка Docs ведёт на intro', async ({ page, mainPage }) => {
@@ -38,26 +38,26 @@ test.describe('Хедер', () => {
     await mainPage.headerFragment.searchButton.click();
     const searchModal = page.locator('.DocSearch-Modal');
     await searchModal.waitFor({ state: 'visible' });
-    await expect(searchModal).toBeVisibleAllure('DocSearch modal');
+    expect(searchModal).toBeVisibleAllure('DocSearch modal');
   });
 
   test('Переключатель темы виден и кликабелен', async ({ mainPage }) => {
-    await expect(mainPage.headerFragment.themeToggle).toBeVisibleAllure('Theme toggle');
+    expect(mainPage.headerFragment.themeToggle).toBeVisibleAllure('Theme toggle');
     await mainPage.headerFragment.themeToggle.click();
   });
 
   test('Ссылка GitHub имеет корректный href', async ({ mainPage }) => {
-    await expect(mainPage.headerFragment.githubLink).toHaveAttributeAllure('href', /github\.com\/microsoft\/playwright/, 'GitHub link');
+    expect(mainPage.headerFragment.githubLink).toHaveAttributeAllure('href', /github\.com\/microsoft\/playwright/, 'GitHub link');
   });
 
   test('Ссылка Discord имеет корректный href', async ({ mainPage }) => {
-    await expect(mainPage.headerFragment.discordLink).toHaveAttributeAllure('href', /aka\.ms\/playwright\/discord/, 'Discord link');
+    expect(mainPage.headerFragment.discordLink).toHaveAttributeAllure('href', /aka\.ms\/playwright\/discord/, 'Discord link');
   });
 
   test('Выпадающий список языка открывается, опция Python ведёт на страницу', async ({ page, mainPage }) => {
     await mainPage.headerFragment.languageDropdown.hover();
     const dropdownMenu = page.locator('.dropdown__menu');
-    await expect(dropdownMenu).toBeVisibleAllure('Language dropdown menu');
+    expect(dropdownMenu).toBeVisibleAllure('Language dropdown menu');
 
     const pythonOption = await mainPage.headerFragment.getLanguageOption('/python/');
     await pythonOption.click();
