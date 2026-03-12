@@ -57,7 +57,7 @@ export class ApiMock {
         isConsumed = true;
       }
 
-      await allure.step(`Fulfill mocked API ${description}`, async () => {
+      await allure.step(`Ответ мока API ${description}`, async () => {
         if (config.delayMs && config.delayMs > 0) {
           await this.delay(config.delayMs);
         }
@@ -70,7 +70,7 @@ export class ApiMock {
       }
     };
 
-    await allure.step(`Register mocked API ${description}`, async () => {
+    await allure.step(`Регистрация мока API ${description}`, async () => {
       await this.page.route(config.url, handler);
     });
 
@@ -92,7 +92,7 @@ export class ApiMock {
   }
 
   async reset(): Promise<void> {
-    await allure.step('Reset mocked API routes', async () => {
+    await allure.step('Сброс моков API', async () => {
       const registrations = [...this.registrations];
 
       for (const registration of registrations) {

@@ -1,6 +1,6 @@
 import { test, expect } from '../index';
 
-test.describe('API mocks', () => {
+test.describe('API-моки', () => {
   test('Метод get подменяет GET API-ответ после навигации', async ({ apiMock, mainPage, page }) => {
     await apiMock.get('**/api/mock-demo', {
       source: 'mock',
@@ -26,7 +26,7 @@ test.describe('API mocks', () => {
           items: ['playwright'],
         },
       },
-      'Mocked API response',
+      'Ответ мока API',
     );
   });
 
@@ -63,7 +63,7 @@ test.describe('API mocks', () => {
           id: 101,
         },
       },
-      'Mocked POST API response',
+      'Ответ мока POST API',
     );
   });
 
@@ -80,6 +80,6 @@ test.describe('API mocks', () => {
       return apiResponse.ok;
     });
 
-    await expect(responseOk).toEqualAllure(false, 'API mock is removed after reset');
+    await expect(responseOk).toEqualAllure(false, 'Мок API снят после reset');
   });
 });
