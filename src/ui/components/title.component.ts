@@ -2,14 +2,11 @@ import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from './base.component';
 
 /**
- * Class representing headers (h1, h2, span etc.).
- * Inherits from BaseComponent and uses its methods for interaction.
+ * Класс, представляющий заголовки (h1, h2, span и т.д.).
+ * Наследуется от BaseComponent и использует его методы для взаимодействия.
  */
 export class Title extends BaseComponent {
-  title: Locator;
-
-  constructor(page: Page, locator: string | Locator) {
-    super(page, locator);
-    this.title = this.element;
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string, name?: string) {
+    super(page, parentOrLocator, locator, name);
   }
 }

@@ -3,8 +3,8 @@ import { assertionBase } from './expectBase';
 
 export const toBeUndefinedAllure = baseExpect.extend({
   async toBeUndefinedAllure(value: unknown, whatMessage?: string) {
-    const subject = whatMessage ?? 'value';
-    const logMessage = `🔍 Check: "${subject}" should be undefined`;
+    const subject = whatMessage ?? 'значение';
+    const logMessage = `🔍 Проверка: "${subject}" должен быть undefined`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toBe',

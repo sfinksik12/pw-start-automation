@@ -4,7 +4,7 @@ import { assertionBase, logMessageElem } from './expectBase';
 export const toHaveAttributeAllure = baseExpect.extend({
   async toHaveAttributeAllure(locator: unknown, attributeName: string, expectedValue: string | RegExp, whatMessage?: string) {
     const subject = whatMessage ?? logMessageElem(locator);
-    const logMessage = `📝 Check: "${subject}" should have attribute "${attributeName}" with value "${expectedValue}"`;
+    const logMessage = `📝 Проверка: "${subject}" должен иметь атрибут "${attributeName}" со значением "${expectedValue}"`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toHaveAttribute',

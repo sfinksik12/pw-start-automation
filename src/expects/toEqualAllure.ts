@@ -3,8 +3,8 @@ import { assertionBase } from './expectBase';
 
 export const toEqualAllure = baseExpect.extend({
   async toEqualAllure(actual: unknown, expected: unknown, whatMessage?: string) {
-    const subject = whatMessage ?? 'values';
-    const logMessage = `🎯 Check: "${subject}" should be equal to "${expected}"`;
+    const subject = whatMessage ?? 'значения';
+    const logMessage = `🎯 Проверка: "${subject}" должен равняться "${expected}"`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toEqual',

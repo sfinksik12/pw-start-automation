@@ -2,14 +2,11 @@ import type { Page, Locator } from '@playwright/test';
 import { BaseComponent } from './base.component';
 
 /**
- * Class representing label elements.
- * Inherits from BaseComponent and uses its methods for interaction.
+ * Класс, представляющий лейблы.
+ * Наследуется от BaseComponent и использует его методы для взаимодействия.
  */
 export class Label extends BaseComponent {
-  label: Locator;
-
-  constructor(page: Page, locator: string | Locator, description?: string) {
-    super(page, locator, null, description);
-    this.label = this.element;
+  constructor(page: Page, parentOrLocator: string | Locator, locator?: string, name?: string) {
+    super(page, parentOrLocator, locator, name);
   }
 }

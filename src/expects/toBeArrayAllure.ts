@@ -3,8 +3,8 @@ import { assertionBase } from './expectBase';
 
 export const toBeArrayAllure = baseExpect.extend({
   async toBeArrayAllure(value: unknown, whatMessage?: string) {
-    const subject = whatMessage ?? 'value';
-    const logMessage = `🔍 Check: "${subject}" should be an array`;
+    const subject = whatMessage ?? 'значение';
+    const logMessage = `🔍 Проверка: "${subject}" должен быть массивом`;
     return assertionBase({
       assertionContext: this,
       baseAssertionName: 'toBe',
