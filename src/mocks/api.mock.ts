@@ -166,9 +166,7 @@ export class ApiMock {
   private async unregister(url: UrlMatcher, handler: MockHandler): Promise<void> {
     await this.page.unroute(url, handler);
 
-    const registrationIndex = this.registrations.findIndex(
-      (registration) => registration.url === url && registration.handler === handler
-    );
+    const registrationIndex = this.registrations.findIndex(registration => registration.url === url && registration.handler === handler);
 
     if (registrationIndex >= 0) {
       this.registrations.splice(registrationIndex, 1);
@@ -176,6 +174,6 @@ export class ApiMock {
   }
 
   private delay(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

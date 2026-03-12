@@ -26,7 +26,7 @@ test.describe('API mocks', () => {
           items: ['playwright'],
         },
       },
-      'Mocked API response'
+      'Mocked API response',
     );
   });
 
@@ -39,7 +39,7 @@ test.describe('API mocks', () => {
       },
       {
         status: 201,
-      }
+      },
     );
 
     await mainPage.openPage('/');
@@ -63,7 +63,7 @@ test.describe('API mocks', () => {
           id: 101,
         },
       },
-      'Mocked POST API response'
+      'Mocked POST API response',
     );
   });
 

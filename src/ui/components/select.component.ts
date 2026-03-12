@@ -11,10 +11,7 @@ export class Select extends BaseComponent {
     super(page, parentOrLocator, locator, name);
   }
 
-  async selectOption(
-    value: string | { value?: string; label?: string; index?: number } | Array<string | { value?: string; label?: string; index?: number }>,
-    options?: { timeout?: number; force?: boolean }
-  ): Promise<string[]> {
+  async selectOption(value: string | { value?: string; label?: string; index?: number } | Array<string | { value?: string; label?: string; index?: number }>, options?: { timeout?: number; force?: boolean }): Promise<string[]> {
     return allure.step(`Выбор опции "${value}" в "${this.name}"`, async () => {
       return await this.element.selectOption(value as Parameters<Locator['selectOption']>[0], options);
     });

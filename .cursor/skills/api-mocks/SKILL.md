@@ -40,21 +40,21 @@ test.beforeEach(async ({ apiMock, mainPage }) => {
 ### POST mock
 
 ```typescript
-await apiMock.post(
-  '**/api/save',
-  { saved: true },
-  { status: 201 }
-);
+await apiMock.post('**/api/save', { saved: true }, { status: 201 });
 ```
 
 ### Advanced mock
 
 ```typescript
-await apiMock.mock('**/api/report', { items: [] }, {
-  method: 'GET',
-  once: true,
-  delayMs: 300,
-});
+await apiMock.mock(
+  '**/api/report',
+  { items: [] },
+  {
+    method: 'GET',
+    once: true,
+    delayMs: 300,
+  },
+);
 ```
 
 ### Reset mocks

@@ -81,7 +81,7 @@ export async function assertionBase(options: AssertionOptions): Promise<MatcherR
     pass,
     name: customAssertionName,
     expectedValue,
-    actual: (msg && typeof msg === 'object' && 'actual' in msg && msg.actual !== undefined) ? msg.actual : actualValue,
+    actual: msg && typeof msg === 'object' && 'actual' in msg && msg.actual !== undefined ? msg.actual : actualValue,
   };
 }
 
@@ -113,22 +113,13 @@ export function logMessageElem(locator: unknown, message?: string): string {
   return String(locator);
 }
 
-export function getMessage(
-  assertionContext: AssertionContext,
-  pass: boolean,
-  customAssertionName: string,
-  matcherResult: unknown,
-  message?: string
-): string {
+export function getMessage(assertionContext: AssertionContext, pass: boolean, customAssertionName: string, matcherResult: unknown, message?: string): string {
   if (pass) return 'пройдено';
   const hint = assertionContext.utils?.matcherHint
     ? assertionContext.utils.matcherHint(customAssertionName, undefined, undefined, {
         isNot: assertionContext.isNot,
       })
     : customAssertionName;
-  const msg =
-    matcherResult && typeof matcherResult === 'object' && 'message' in matcherResult
-      ? (matcherResult as { message?: string }).message
-      : undefined;
+  const msg = matcherResult && typeof matcherResult === 'object' && 'message' in matcherResult ? (matcherResult as { message?: string }).message : undefined;
   return message || msg || (typeof matcherResult === 'string' ? matcherResult : undefined) || hint;
 }

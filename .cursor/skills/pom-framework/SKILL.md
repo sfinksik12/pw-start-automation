@@ -16,7 +16,7 @@ description: Creates POM components, fragments, and pages for pw-start-automatio
 
 # Inputs needed
 
-- Селекторы элементов (CSS, data-*, role)
+- Селекторы элементов (CSS, data-\*, role)
 - Иерархия: что внутри чего (parent → child)
 - Статичные (всегда в DOM) vs динамичные (появляются после действия или зависят от параметра)
 - Есть ли уже нужные локаторы/методы во фрагментах и страницах (проверить перед созданием)
@@ -29,33 +29,33 @@ description: Creates POM components, fragments, and pages for pw-start-automatio
 
 ## Компонент
 
-1) Проверить: есть ли подходящий в src/ui/components/? Button, Input, Label, Checkbox, Select, Title.
-2) Если нужен новый: extends BaseComponent, конструктор `(page, parentOrLocator, locator?, name?)`.
-3) parentOrLocator: Locator (root или component.element) или string (селектор страницы).
-4) locator: CSS внутри parent. name: читаемое описание для Allure.
-5) Действия (click, fill, hover и т.п.) — обёрнуты в allure.step().
-6) Экспорт в index.ts.
+1. Проверить: есть ли подходящий в src/ui/components/? Button, Input, Label, Checkbox, Select, Title.
+2. Если нужен новый: extends BaseComponent, конструктор `(page, parentOrLocator, locator?, name?)`.
+3. parentOrLocator: Locator (root или component.element) или string (селектор страницы).
+4. locator: CSS внутри parent. name: читаемое описание для Allure.
+5. Действия (click, fill, hover и т.п.) — обёрнуты в allure.step().
+6. Экспорт в index.ts.
 
 **Выбор компонента:**
 
-| Элемент | Компонент |
-|---------|-----------|
-| Текст, лого, заголовок (чтение) | Label |
-| Кнопка, ссылка `<a>`, клик, hover | Button |
-| Поле ввода input | Input |
-| Чекбокс | Checkbox |
-| Выпадающий список select | Select |
-| Заголовок h1-h6 | Title |
+| Элемент                           | Компонент |
+| --------------------------------- | --------- |
+| Текст, лого, заголовок (чтение)   | Label     |
+| Кнопка, ссылка `<a>`, клик, hover | Button    |
+| Поле ввода input                  | Input     |
+| Чекбокс                           | Checkbox  |
+| Выпадающий список select          | Select    |
+| Заголовок h1-h6                   | Title     |
 
 ## Фрагмент
 
-1) JSDoc-комментарий над классом: кратко описать, что за фрагмент. Пример: `/** Фрагмент хедера страницы. */`
-2) extends BaseFragment, super(page).
-3) root: Locator = this.page.locator('.container-selector') — корневой контейнер блока.
-4) Статичные элементы — в конструкторе: new Button(this.page, this.root, 'selector', 'Name').
-5) Динамичные (dropdown items, modal content, зависят от параметра) — в методах с allure.step().
-6) Вложенные элементы: parent = parentComponent.element, не page.locator.
-7) Методы, возвращающие компонент: Promise<Button> и т.п.
+1. JSDoc-комментарий над классом: кратко описать, что за фрагмент. Пример: `/** Фрагмент хедера страницы. */`
+2. extends BaseFragment, super(page).
+3. root: Locator = this.page.locator('.container-selector') — корневой контейнер блока.
+4. Статичные элементы — в конструкторе: new Button(this.page, this.root, 'selector', 'Name').
+5. Динамичные (dropdown items, modal content, зависят от параметра) — в методах с allure.step().
+6. Вложенные элементы: parent = parentComponent.element, не page.locator.
+7. Методы, возвращающие компонент: Promise<Button> и т.п.
 
 **Шаблон фрагмента:**
 
@@ -89,11 +89,11 @@ export class MyFragment extends BaseFragment {
 
 ## Страница
 
-1) extends BasePage, super(page).
-2) Агрегирует только фрагменты, не компоненты.
-3) Фрагменты в конструкторе: new HeaderFragment(page).
-4) Методы BasePage: openPage(url), waitForUrl(), reload(), getTitle(), getUrl(), screenshot().
-5) Специфичные действия страницы — в методах с allure.step().
+1. extends BasePage, super(page).
+2. Агрегирует только фрагменты, не компоненты.
+3. Фрагменты в конструкторе: new HeaderFragment(page).
+4. Методы BasePage: openPage(url), waitForUrl(), reload(), getTitle(), getUrl(), screenshot().
+5. Специфичные действия страницы — в методах с allure.step().
 
 **Регистрация в фикстурах:**
 
@@ -103,12 +103,12 @@ export class MyFragment extends BaseFragment {
 
 ## Селекторы
 
-- Предпочитать: data-*, role, семантические классы.
+- Предпочитать: data-\*, role, семантические классы.
 - Избегать: сгенерированные (.colorModeToggle_DEke). Если нет выбора — использовать и закомментировать риск.
 
 # Output format
 
-- Файлы: src/ui/components/*.component.ts, src/ui/fragments/*.fragment.ts, src/ui/pages/*.page.ts
+- Файлы: src/ui/components/_.component.ts, src/ui/fragments/_.fragment.ts, src/ui/pages/\*.page.ts
 - Обновления: index.ts (экспорт компонента/фрагмента/страницы), pom.fixtures.ts (фикстура для новой страницы)
 
 # Quality bar (self-check)

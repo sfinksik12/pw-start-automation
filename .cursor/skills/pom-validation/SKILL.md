@@ -57,7 +57,7 @@ description: Validates POM structure in pw-start-automation: components, fragmen
 
 ### 5. Селекторы (все слои)
 
-- [ ] Предпочтение: data-*, role, семантические классы
+- [ ] Предпочтение: data-\*, role, семантические классы
 - [ ] Сгенерированные классы — с комментарием о риске
 - [ ] Scoping: элементы фрагмента внутри root
 
@@ -72,20 +72,24 @@ description: Validates POM structure in pw-start-automation: components, fragmen
 ## POM Validation Report
 
 ### Passed
+
 - [x] Компоненты: ...
 - [x] Фрагменты: ...
 
 ### Violations
 
 #### Critical
+
 - `src/ui/fragments/foo.fragment.ts:15` — page.locator для элемента фрагмента, нужен root
 - ...
 
 #### Suggestion
+
 - `src/ui/pages/bar.page.ts` — метод X можно вынести во фрагмент
 - ...
 
 ### Summary
+
 - Passed: N checks
 - Critical: N
 - Suggestion: N
