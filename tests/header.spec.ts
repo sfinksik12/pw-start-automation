@@ -1,12 +1,14 @@
 import { test, expect } from '../index';
+import type { MainPage } from '../src/ui/pages/mainPage';
+import type { HeaderFragment } from '../src/ui/fragments/header.fragment';
 
 test.describe('Хедер', () => {
-  test.beforeEach(async ({ mainPage }) => {
+  test.beforeEach(async ({ mainPage }: { mainPage: MainPage }) => {
     await mainPage.openPage('/');
   });
 
-  test('Хедер виден', async ({ mainPage }) => {
-    const headerFragment = mainPage.headerFragment;
+  test('Хедер виден', async ({ mainPage }: { mainPage: MainPage }) => {
+    const headerFragment: HeaderFragment = mainPage.headerFragment;
     await expect(headerFragment.root).toBeVisibleAllure('Header root');
     await expect(headerFragment.logo).toBeVisibleAllure('Logo');
     await expect(headerFragment.docsLink).toBeVisibleAllure('Docs link');

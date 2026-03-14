@@ -1,7 +1,18 @@
 import { test, expect } from '../index';
+import type { Page } from '@playwright/test';
+import type { MainPage } from '../src/ui/pages/mainPage';
+import type { ApiMock } from '../src/mocks/api.mock';
 
 test.describe('API mocks', () => {
-  test('Метод get подменяет GET API-ответ после навигации', async ({ apiMock, mainPage, page }) => {
+  test('Метод get подменяет GET API-ответ после навигации', async ({
+    apiMock,
+    mainPage,
+    page,
+  }: {
+    apiMock: ApiMock;
+    mainPage: MainPage;
+    page: Page;
+  }) => {
     await apiMock.get('**/api/mock-demo', {
       source: 'mock',
       items: ['playwright'],
