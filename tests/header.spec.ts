@@ -13,6 +13,11 @@ test.describe('Хедер', () => {
     expect(headerFragment.apiLink).toBeVisibleAllure('Ссылка API');
     expect(headerFragment.communityLink).toBeVisibleAllure('Ссылка Community');
     expect(headerFragment.searchButton).toBeVisibleAllure('Кнопка поиска');
+    expect(headerFragment.githubLink).toBeVisibleAllure('Ссылка GitHub');
+    expect(headerFragment.discordLink).toBeVisibleAllure('Ссылка Discord');
+    expect(headerFragment.languageDropdown).toBeVisibleAllure('Выпадающий список языка');
+    expect(headerFragment.themeToggle).toBeVisibleAllure('Переключатель темы');
+    expect(headerFragment.mobileToggle).toBeVisibleAllure('Мобильное меню');
   });
 
   test('Логотип содержит текст Playwright', async ({ mainPage }) => {
