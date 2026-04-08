@@ -34,7 +34,7 @@ export default defineConfig({
     trace: 'off',
     actionTimeout: 30000,
     navigationTimeout: 30000,
-    headless: false,
+    headless: true,
     ignoreHTTPSErrors: true,
   },
   expect: {

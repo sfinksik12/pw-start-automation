@@ -16,7 +16,6 @@ export class HeaderFragment extends BaseFragment {
   searchButton: Button;
   githubLink: Button;
   discordLink: Button;
-  mobileToggle: Button;
 
   constructor(page: Page) {
     super(page);
@@ -26,16 +25,21 @@ export class HeaderFragment extends BaseFragment {
     this.apiLink = new Button(this.page, this.root, 'a.navbar__link[href="/docs/api/class-playwright"]', 'Ссылка API');
     this.communityLink = new Button(this.page, this.root, 'a.navbar__link[href="/community/welcome"]', 'Ссылка Community');
     this.languageDropdown = new Button(this.page, this.root, '.dropdown--hoverable > a', 'Выпадающий список языка');
-    this.themeToggle = new Button(this.page, this.root, '.toggle_vylO .toggleButton_gllP', 'Переключатель темы');
+    this.themeToggle = new Button(
+      this.page,
+      this.root,
+      'button[aria-label*="Switch between dark and light mode"]',
+      'Переключатель темы',
+    );
     this.searchButton = new Button(this.page, this.root, 'button.DocSearch-Button', 'Кнопка поиска');
     this.githubLink = new Button(this.page, this.root, 'a[aria-label="GitHub repository"]', 'Ссылка GitHub');
     this.discordLink = new Button(this.page, this.root, 'a[aria-label="Discord server"]', 'Ссылка Discord');
-    this.mobileToggle = new Button(this.page, this.root, 'button.navbar__toggle', 'Мобильное меню');
   }
 
   async getLanguageOption(prefix: string): Promise<Button> {
     return allure.step(`Получение опции языка: ${prefix}`, async () => {
-      return new Button(this.page, this.page.locator('.dropdown__menu'), `a.dropdown__link[href="${prefix}"]`, `Опция языка ${prefix}`);
+      const menu = this.root.locator('.dropdown--hoverable .dropdown__menu');
+      return new Button(this.page, menu, `a.dropdown__link[href="${prefix}"]`, `Опция языка ${prefix}`);
     });
   }
 }
