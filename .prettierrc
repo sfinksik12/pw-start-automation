@@ -1,7 +1,4 @@
 {
-  // Prettier — автоматическое форматирование кода
-  // Команды: npm run format (запись), npm run format:check (проверка)
-
   "semi": true,
   "trailingComma": "all",
   "singleQuote": true,

@@ -50,19 +50,11 @@ test.describe('Хедер', () => {
   });
 
   test('Ссылка GitHub имеет корректный href', async ({ mainPage }) => {
-    await expect(mainPage.headerFragment.githubLink).toHaveAttributeAllure(
-      'href',
-      /github\.com\/microsoft\/playwright/,
-      'Ссылка GitHub',
-    );
+    await expect(mainPage.headerFragment.githubLink).toHaveAttributeAllure('href', /github\.com\/microsoft\/playwright/, 'Ссылка GitHub');
   });
 
   test('Ссылка Discord имеет корректный href', async ({ mainPage }) => {
-    await expect(mainPage.headerFragment.discordLink).toHaveAttributeAllure(
-      'href',
-      /aka\.ms\/playwright\/discord/,
-      'Ссылка Discord',
-    );
+    await expect(mainPage.headerFragment.discordLink).toHaveAttributeAllure('href', /aka\.ms\/playwright\/discord/, 'Ссылка Discord');
   });
 
   test('Выпадающий список языка открывается, опция Python ведёт на страницу', async ({ page, mainPage }) => {
