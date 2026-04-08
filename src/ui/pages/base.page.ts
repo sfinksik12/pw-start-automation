@@ -10,7 +10,8 @@ export class BasePage {
 
   async openPage(url: string): Promise<void> {
     await allure.step(`Открытие страницы ${url}`, async () => {
-      await this.page.goto(url);
+      await this.page.goto(url, { waitUntil: 'domcontentloaded' });
+      await this.page.waitForLoadState('load');
     });
   }
 

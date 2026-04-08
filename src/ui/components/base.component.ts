@@ -35,11 +35,14 @@ export class BaseComponent {
     if (typeof this.parentLocator === 'string') {
       return this.page.locator(this.parentLocator);
     }
-    return this.parentLocator!;
+    if (!this.parentLocator) {
+      throw new Error('parentLocator не определён');
+    }
+    return this.parentLocator;
   }
 
   private _addDescription(baseLocator: Locator): Locator {
-    return baseLocator.describe('элемент');
+    return baseLocator.describe(this.name);
   }
 
   async waitFor(options: { state?: 'attached' | 'detached' | 'visible' | 'hidden'; timeout?: number } = {}): Promise<void> {
