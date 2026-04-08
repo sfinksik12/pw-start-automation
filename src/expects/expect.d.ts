@@ -7,6 +7,7 @@ declare global {
       toBeDisabledAllure(whatMessage?: string): R;
       toBeEditableAllure(whatMessage?: string): R;
       toHaveTextAllure(expectedText: string | RegExp, whatMessage?: string): R;
+      toHaveValueAllure(expectedValue: string | RegExp, whatMessage?: string): R;
       toHaveAttributeAllure(attributeName: string, expectedValue: string | RegExp, whatMessage?: string): R;
       toHaveClassAllure(expectedClass: string | RegExp, options?: { timeout?: number }): R;
       toEqualAllure(expected: unknown, whatMessage?: string): R;
